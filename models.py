@@ -27,6 +27,11 @@ class LogEntry(BaseModel):
     cpu_system: int = IntegerField()
     ms: str = TextField()
 
+    def to_json(self):
+        dic = self.__dict__['__data__']
+        dic['timestamp'] = dic['timestamp'].isoformat()
+        return dic
+
 
 db.connect()
 db.create_tables([LogEntry])

@@ -11,6 +11,8 @@ autopep8 = "*"
 peewee = "*"
 python-dateutil = "*"
 halo = "*"
+flask = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
