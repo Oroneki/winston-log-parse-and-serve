@@ -1,8 +1,14 @@
+from models import LogEntry, db
 import json
 import pathlib
-from models import LogEntry, db
+import sys
+import pathlib
 from halo import Halo
 from argparser import args
+
+if pathlib.Path(args.db).exists():
+    print(f'Arquivo "{args.db}" já existe... saindo...')
+    sys.exit(1)
 
 
 def yield_json_logs_from_folder(folder: str):
@@ -50,6 +56,7 @@ def parse_and_save_to_db(folder: str):
 def patiently_parse_log_folder(folder: str):
     with Halo(text='Parsing...', spinner='dots'):
         parse_and_save_to_db(folder)
+    LogEntry.raw('CREATE INDEX t_sort ON logentry (t);')
 
 
 if __name__ == "__main__":
