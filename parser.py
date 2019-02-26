@@ -29,17 +29,17 @@ def parse_and_save_to_db(folder: str):
     entries = []
     for i, js in enumerate(yield_json_logs_from_folder(folder)):
         entryDict = {
-            'level': js['level'],
-            'message': js['message'],
-            'thread': js['thread'],
-            'memory_rss': js['memory']['rss'],
-            'memory_heap_total': js['memory']['heapTotal'],
-            'memory_heap_used': js['memory']['heapUsed'],
-            'memory_external': js['memory']['external'],
-            'cpu_user': js['cpu']['user'],
-            'cpu_system': js['cpu']['system'],
-            'timestamp': js['timestamp'],
-            'ms': js['ms'],
+            'w': js.get('w'),
+            'l': js.get('l'),
+            't': js.get('t'),
+            'cxt': js.get('cxt'),
+            'p': js.get('p'),
+            'message': js.get('message'),
+            'mhu': js.get('mhu'),
+            'mht': js.get('mht'),
+            'mrss': js.get('mrss'),
+            'ct': js.get('ct'),
+            'cl': js.get('cl'),
         }
         entries.append(entryDict)
         if i % 70 == 0:

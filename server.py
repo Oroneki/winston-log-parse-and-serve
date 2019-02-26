@@ -14,38 +14,40 @@ class Level(enum.Enum):
     DEBUG = 'debug'
     INFO = 'info'
     WARN = 'warn'
+    VERBOSE = 'verbose'
+    ERROR = 'error'
 
 
 class Worker(enum.Enum):
-    MAIN = '_main_'
-    T1 = '_th__1_'
-    T2 = '_th__2_'
-    T3 = '_th__3_'
+    MAIN = 0
+    T1 = 1
+    T2 = 2
+    T3 = 3
 
 
 def get_database(page: int = 1, level: Level = None, worker: Worker = None):
     print("page: ", page, "level: ", level, "worker: ", worker)
     number_of_records = 200
     query = LogEntry.select().order_by(
-        Desc(LogEntry.timestamp)).paginate(page, number_of_records)
+        Desc(LogEntry.t)).paginate(page, number_of_records)
     if (not level is None) and (not worker is None):
         print("------------------------")
         query = LogEntry.select().where(
-            (LogEntry.level == level), (LogEntry.thread == worker)
+            (LogEntry.l == level), (LogEntry.w == worker)
         ).order_by(
-            Desc(LogEntry.timestamp)).paginate(page, number_of_records)
+            Desc(LogEntry.t)).paginate(page, number_of_records)
     if (level is None) and (not worker is None):
         print("------------------------")
         query = LogEntry.select().where(
-            (LogEntry.thread == worker)
+            (LogEntry.w == worker)
         ).order_by(
-            Desc(LogEntry.timestamp)).paginate(page, number_of_records)
+            Desc(LogEntry.t)).paginate(page, number_of_records)
     if (not level is None) and (worker is None):
         print("------------------------")
         query = LogEntry.select().where(
-            (LogEntry.level == level)
+            (LogEntry.l == level)
         ).order_by(
-            Desc(LogEntry.timestamp)).paginate(page, 20)
+            Desc(LogEntry.t)).paginate(page, 20)
 
     return [i.to_json() for i in query]
 

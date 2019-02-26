@@ -15,22 +15,40 @@ class BaseModel(Model):
 
 
 class LogEntry(BaseModel):
-    level: str = TextField()
-    timestamp = DateTimeField()
-    thread: str = TextField()
+    w: int = IntegerField()
+    l: str = TextField()
+    t: str = TextField()
+    cxt: str = TextField(null=True)
+    p: str = TextField(null=True)
     message: str = TextField()
-    memory_rss: int = IntegerField()
-    memory_heap_total: int = IntegerField()
-    memory_heap_used: int = IntegerField()
-    memory_external: int = IntegerField()
-    cpu_user: int = IntegerField()
-    cpu_system: int = IntegerField()
-    ms: str = TextField()
+    mhu: int = IntegerField()
+    mht: int = IntegerField()
+    mrss: int = IntegerField()
+    ct: int = IntegerField()
+    cl: int = IntegerField()
 
     def to_json(self):
         dic = self.__dict__['__data__']
-        dic['timestamp'] = dic['timestamp'].isoformat()
         return dic
+
+
+# class LogEntry(BaseModel):
+#     level: str = TextField()
+#     timestamp = DateTimeField()
+#     thread: str = TextField()
+#     message: str = TextField()
+#     memory_rss: int = IntegerField()
+#     memory_heap_total: int = IntegerField()
+#     memory_heap_used: int = IntegerField()
+#     memory_external: int = IntegerField()
+#     cpu_user: int = IntegerField()
+#     cpu_system: int = IntegerField()
+#     ms: str = TextField()
+
+#     def to_json(self):
+#         dic = self.__dict__['__data__']
+#         dic['timestamp'] = dic['timestamp'].isoformat()
+#         return dic
 
 
 db.connect()
