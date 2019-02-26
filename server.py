@@ -1,4 +1,4 @@
-from flask import Flask, request, json
+from flask import Flask, request
 import enum
 from peewee import Desc
 from models import LogEntry
