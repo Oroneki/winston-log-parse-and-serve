@@ -47,7 +47,7 @@ def get_database(page: int = 1, level: Level = None, worker: Worker = None):
         query = LogEntry.select().where(
             (LogEntry.l == level)
         ).order_by(
-            Desc(LogEntry.t)).paginate(page, 20)
+            Desc(LogEntry.timestamp)).paginate(page, number_of_records)
 
     return [i.to_json() for i in query]
 
