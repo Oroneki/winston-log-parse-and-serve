@@ -3,6 +3,8 @@ import datetime
 import os
 from argparser import args
 
+print(args.db)
+
 db = SqliteDatabase(args.db, pragmas={
     'journal_mode': 'wal',  # WAL-mode.
     'cache_size': -64 * 1000,  # 128MB cache.
