@@ -64,7 +64,10 @@ def handle_api():
     worker = request.args.get('worker')
     print('request page: ', page, '| worker: ', worker, '| level: ', level)
     res = get_database(page, level, worker)
-    return json.dumps(res)
+    js = json.dumps(res)
+    # with open('sample_json.json', 'w+') as f:
+    #     f.write(js)
+    return js
 
 
 if __name__ == "__main__":
