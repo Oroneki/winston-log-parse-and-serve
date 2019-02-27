@@ -18,7 +18,7 @@ class LogEntry(BaseModel):
     w: int = IntegerField()
     l: str = TextField()
     t: str = TextField()
-    cxt: str = TextField(null=True)
+    ctx: str = TextField(null=True)
     p: str = TextField(null=True)
     message: str = TextField()
     mhu: int = IntegerField()
